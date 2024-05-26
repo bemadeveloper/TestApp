@@ -11,6 +11,8 @@ import SnapKit
 
 class LoadingView: UIView {
     
+    var completionHandler: (() -> Void)?
+    
     // MARK: - Outlets
     
     private let acitivityIndicator = UIActivityIndicatorView(style: .large)
@@ -49,7 +51,6 @@ class LoadingView: UIView {
         loadingIcon.translatesAutoresizingMaskIntoConstraints = false
         
         loadingIcon.image = UIImage(named: "logo")
-        
     }
     
     private func setupHierarchy() {
@@ -87,11 +88,12 @@ class LoadingView: UIView {
     
     func hide() {
         self.removeFromSuperview()
+        completionHandler?()
     }
     
 }
 
-extension UIColor {
+public extension UIColor {
     convenience init(hex: String) {
         let hexString = hex.trimmingCharacters(in: .whitespacesAndNewlines)
         let scanner = Scanner(string: hexString)

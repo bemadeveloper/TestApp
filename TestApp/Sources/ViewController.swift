@@ -17,7 +17,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemPink
+        setupView()
+        
         loadData()
     }
     
@@ -35,6 +36,15 @@ class ViewController: UIViewController {
     
     // MARK: - Setups
 
+    private func setupView() {
+        let onboardingView = OnboardingView(frame: self.view.bounds)
+        view.addSubview(onboardingView)
+        
+    }
+    
+    private func setupHierarchy() {
+        
+    }
 
 }
 
