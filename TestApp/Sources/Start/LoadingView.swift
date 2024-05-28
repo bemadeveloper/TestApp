@@ -60,7 +60,7 @@ class LoadingView: UIView {
     
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            acitivityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            acitivityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -20),
             acitivityIndicator.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -80),
             
             loadingIcon.centerXAnchor.constraint(equalTo: self.centerXAnchor),
@@ -71,7 +71,7 @@ class LoadingView: UIView {
         ])
     }
     
-    func setGradientBackground() {
+    private func setGradientBackground() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [
             UIColor(hex: "#1C2F4E").cgColor,
@@ -88,11 +88,12 @@ class LoadingView: UIView {
         self.layer.sublayers?.first?.frame = self.bounds
     }
     
-    func show(on view: UIView) {
+    func show(on view: UIView, completion: (() -> Void)? = nil) {
         self.frame = view.bounds
         view.addSubview(self)
         acitivityIndicator.startAnimating()
         updatePercentage(duration: 5.0)
+        completionHandler = completion
     }
     
     func hide() {
@@ -140,3 +141,5 @@ public extension UIColor {
         self.init(red: r, green: g, blue: b, alpha: 1.0)
     }
 }
+
+
