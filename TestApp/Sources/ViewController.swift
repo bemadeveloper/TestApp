@@ -26,8 +26,7 @@ class ViewController: UIViewController {
         loadingView.show(on: self.view)
         
         DispatchQueue.global().async {
-            sleep(3)
-            
+            sleep(5)
             DispatchQueue.main.async {
                 self.loadingView.hide()
             }

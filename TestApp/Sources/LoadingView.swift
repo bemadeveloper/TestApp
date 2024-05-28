@@ -17,13 +17,7 @@ class LoadingView: UIView {
     
     private let acitivityIndicator = UIActivityIndicatorView(style: .large)
     private let loadingIcon = UIImageView()
-    
-    private let progressView: UIProgressView = {
-        let progressView = UIProgressView(progressViewStyle: .bar)
-        progressView.trackTintColor = .gray
-        progressView.progressTintColor = .systemBlue
-        return progressView
-    }()
+    private let percentageLabel = UILabel()
     
     // MARK: - Inits
     
@@ -43,52 +37,86 @@ class LoadingView: UIView {
     // MARK: - Setups
     
     private func setupView() {
-        let customColor = UIColor(hex: "#020C1E")
-        self.backgroundColor = customColor
+        setGradientBackground()
         self.layer.cornerRadius = 10
         
-        progressView.translatesAutoresizingMaskIntoConstraints = false
+        acitivityIndicator.color = .white
+        acitivityIndicator.translatesAutoresizingMaskIntoConstraints = false
         loadingIcon.translatesAutoresizingMaskIntoConstraints = false
+        percentageLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        loadingIcon.image = UIImage(named: "logo")
+        loadingIcon.image = UIImage(named: "logos")
+        
+        percentageLabel.text = "0%"
+        percentageLabel.textColor = .white
+        percentageLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
     }
     
     private func setupHierarchy() {
-        self.addSubview(progressView)
+        self.addSubview(acitivityIndicator)
         self.addSubview(loadingIcon)
+        self.addSubview(percentageLabel)
     }
     
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            progressView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            progressView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -170), // Прижимаем к нижнему краю, учитывая safe area
-            progressView.heightAnchor.constraint(equalToConstant: 3),
-            progressView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5)
+            acitivityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            acitivityIndicator.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -80),
+            
+            loadingIcon.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            loadingIcon.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor, constant: -10),
+            
+            percentageLabel.leadingAnchor.constraint(equalTo: acitivityIndicator.trailingAnchor, constant: 10),
+            percentageLabel.centerYAnchor.constraint(equalTo: acitivityIndicator.centerYAnchor)
         ])
-        
-        // Установка ограничений для loadingIcon
-        NSLayoutConstraint.activate([
-            loadingIcon.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 170),
-            loadingIcon.centerXAnchor.constraint(equalTo: self.centerXAnchor)
-        ])
-        progressView.setProgress(0, animated: false)
-        
-        
-        for i in 0..<100 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.03, execute: {
-                self.progressView.setProgress(Float(i) / 100, animated: true)
-            })
-        }
+    }
+    
+    func setGradientBackground() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [
+            UIColor(hex: "#1C2F4E").cgColor,
+            UIColor(hex: "#09172E").cgColor
+        ]
+        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.frame = self.bounds
+        gradientLayer.cornerRadius = self.layer.cornerRadius
+        self.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layer.sublayers?.first?.frame = self.bounds
     }
     
     func show(on view: UIView) {
         self.frame = view.bounds
         view.addSubview(self)
+        acitivityIndicator.startAnimating()
+        updatePercentage(duration: 5.0)
     }
     
     func hide() {
+        acitivityIndicator.stopAnimating()
         self.removeFromSuperview()
         completionHandler?()
+    }
+    
+    func updatePercentage(duration: TimeInterval) {
+        let totalUpdates = Int(duration / 0.1)
+        var progress: Float = 0.0
+        let increment = 1.0 / Float(totalUpdates)
+        
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            progress += increment
+            self.percentageLabel.text = "\(Int(progress * 100))%"
+            
+            if progress >= 1.0 {
+                timer.invalidate()
+                self.hide()
+                
+            }
+            
+        }
     }
     
 }
