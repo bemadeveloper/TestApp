@@ -29,6 +29,7 @@ class ViewController: UIViewController {
             sleep(5)
             DispatchQueue.main.async {
                 self.loadingView.hide()
+                self.showNext()
             }
         }
     }
@@ -41,8 +42,9 @@ class ViewController: UIViewController {
         
     }
     
-    private func setupHierarchy() {
-        
+    private func showNext() {
+        let nextViewController = LoginViewController()
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
 
 }

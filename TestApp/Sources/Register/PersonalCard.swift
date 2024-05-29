@@ -1,21 +1,36 @@
 //
-//  LoginViewController.swift
+//  PersonalCard.swift
 //  TestApp
 //
-//  Created by Bema on 28/5/24.
+//  Created by Bema on 29/5/24.
 //
 
+import Foundation
 import UIKit
 
-class LoginViewController: UIViewController {
+
+class PersonalCard: UIViewController {
     
     // MARK: - UI
     
-    private let headerView = AuthHeaderView(title: "Create your profile!", subTitle: "Let's start with your name")
+    private let headerView = AuthHeaderView(title: "Your personal card", subTitle: "Add friends and compete with them")
     
-    let usernameField = CustomTextField(fieldType: .name)
-    private let nextButton = UIButton()
-    private let fullName = UILabel()
+    private let finishButton = UIButton()
+    
+    private lazy var card: UIView = {
+        let card = UIView()
+        card.backgroundColor = UIColor(hex: "#B00D22")
+        card.layer.cornerRadius = 6
+        card.translatesAutoresizingMaskIntoConstraints = false
+        
+        return card
+    }()
+    
+    private let nameLabel = UILabel()
+    private let dateLabel = UILabel()
+    
+    var username: String?
+    var date: String?
     
     // MARK: - Lines
     
@@ -29,20 +44,21 @@ class LoginViewController: UIViewController {
     
     private lazy var secondLine: UIView = {
         let line = UIView()
-        line.backgroundColor = UIColor(hex: "#AEAEAE")
+        line.backgroundColor = UIColor(hex: "#B00D22")
         line.layer.cornerRadius = 3
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
     // MARK: - Lyfecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setGradientBackground()
         self.setupUI()
-        
-        // Do any additional setup after loading the view.
+
+        nameLabel.text = username
+        dateLabel.text = date
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,28 +80,27 @@ class LoginViewController: UIViewController {
     }
     
     private func setupUI() {
-        nextButton.setTitle("Next", for: .normal)
-        nextButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .regular)
-        nextButton.layer.cornerRadius = 15
-        nextButton.backgroundColor = UIColor(hex: "#B00D22")
-        nextButton.setTitleColor(.white, for: .normal)
-        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-        
-        fullName.textColor = UIColor(hex: "#B00D22")
-        fullName.text = "Full name"
-        fullName.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+        finishButton.setTitle("Finish", for: .normal)
+        finishButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        finishButton.layer.cornerRadius = 15
+        finishButton.backgroundColor = UIColor(hex: "#B00D22")
+        finishButton.setTitleColor(.white, for: .normal)
+        finishButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         
         self.view.addSubview(headerView)
-        self.view.addSubview(usernameField)
-        self.view.addSubview(nextButton)
-        usernameField.addSubview(fullName)
+        self.view.addSubview(card)
+        
+        card.addSubview(nameLabel)
+        card.addSubview(dateLabel)
+       
+        self.view.addSubview(finishButton)
         self.view.addSubview(line)
         self.view.addSubview(secondLine)
         
         headerView.translatesAutoresizingMaskIntoConstraints = false
-        usernameField.translatesAutoresizingMaskIntoConstraints = false
-        nextButton.translatesAutoresizingMaskIntoConstraints = false
-        fullName.translatesAutoresizingMaskIntoConstraints = false
+        finishButton.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             line.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 145),
@@ -98,30 +113,30 @@ class LoginViewController: UIViewController {
             secondLine.heightAnchor.constraint(equalToConstant: 4),
             secondLine.widthAnchor.constraint(equalToConstant: 50),
             
-            fullName.centerXAnchor.constraint(equalTo: usernameField.leadingAnchor, constant: 63),
-            fullName.topAnchor.constraint(equalTo: usernameField.topAnchor, constant: 2),
-            fullName.widthAnchor.constraint(equalToConstant: 100),
-            fullName.heightAnchor.constraint(equalToConstant: 20),
-            
             self.headerView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor),
             self.headerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.headerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.headerView.heightAnchor.constraint(equalToConstant: 270),
             
-            self.usernameField.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 30),
-            self.usernameField.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
-            self.usernameField.heightAnchor.constraint(equalToConstant: 55),
-            self.usernameField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
+            self.card.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 30),
+            self.card.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
+            self.card.heightAnchor.constraint(equalToConstant: 55),
+            self.card.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
             
-            self.nextButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            self.nextButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            self.nextButton.heightAnchor.constraint(equalToConstant: 50),
-            self.nextButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85)
+            self.finishButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.finishButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            self.finishButton.heightAnchor.constraint(equalToConstant: 50),
+            self.finishButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
+            
+            nameLabel.centerXAnchor.constraint(equalTo: card.centerXAnchor),
+            nameLabel.topAnchor.constraint(equalTo: card.topAnchor, constant: 10),
+            dateLabel.centerXAnchor.constraint(equalTo: card.centerXAnchor),
+            dateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10)
         ])
     }
     
     @objc private func nextButtonTapped() {
-        let nextViewController = LoginViewControllerSecond()
+        let nextViewController = ScreenLoading()
         navigationController?.pushViewController(nextViewController, animated: true)
     }
 }

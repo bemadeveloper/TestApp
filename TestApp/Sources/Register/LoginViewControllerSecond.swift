@@ -8,6 +8,8 @@
 import UIKit
 
 class LoginViewControllerSecond: UIViewController {
+    var username: String?
+    var completionHandler: ((String?) -> Void)?
     
     // MARK: - DatePicker
     
@@ -17,9 +19,27 @@ class LoginViewControllerSecond: UIViewController {
     
     private let headerView = AuthHeaderView(title: "Create your profile!", subTitle: "Let's start with your name")
     
-    private let dateField = CustomTextField(fieldType: .dateOfBirth)
+    let dateField = CustomTextField(fieldType: .dateOfBirth)
     private let nextButton = UIButton()
     private let dateOfBirth = UILabel()
+    
+    // MARK: - Lines
+    
+    private lazy var line: UIView = {
+        let line = UIView()
+        line.backgroundColor = UIColor(hex: "#B00D22")
+        line.layer.cornerRadius = 3
+        line.translatesAutoresizingMaskIntoConstraints = false
+        return line
+    }()
+    
+    private lazy var secondLine: UIView = {
+        let line = UIView()
+        line.backgroundColor = UIColor(hex: "#B00D22")
+        line.layer.cornerRadius = 3
+        line.translatesAutoresizingMaskIntoConstraints = false
+        return line
+    }()
     
     // MARK: - Lyfecycle
 
@@ -52,7 +72,7 @@ class LoginViewControllerSecond: UIViewController {
     private func setupUI() {
         nextButton.setTitle("Next", for: .normal)
         nextButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .regular)
-        nextButton.layer.cornerRadius = 10
+        nextButton.layer.cornerRadius = 15
         nextButton.backgroundColor = UIColor(hex: "#B00D22")
         nextButton.setTitleColor(.white, for: .normal)
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
@@ -65,6 +85,8 @@ class LoginViewControllerSecond: UIViewController {
         self.view.addSubview(dateField)
         self.view.addSubview(nextButton)
         dateField.addSubview(dateOfBirth)
+        self.view.addSubview(line)
+        self.view.addSubview(secondLine)
         
         headerView.translatesAutoresizingMaskIntoConstraints = false
         dateField.translatesAutoresizingMaskIntoConstraints = false
@@ -72,6 +94,16 @@ class LoginViewControllerSecond: UIViewController {
         dateOfBirth.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            line.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 145),
+            line.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100),
+            line.heightAnchor.constraint(equalToConstant: 4),
+            line.widthAnchor.constraint(equalToConstant: 50),
+            
+            secondLine.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -145),
+            secondLine.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100),
+            secondLine.heightAnchor.constraint(equalToConstant: 4),
+            secondLine.widthAnchor.constraint(equalToConstant: 50),
+            
             dateOfBirth.centerXAnchor.constraint(equalTo: dateField.leadingAnchor, constant: 68),
             dateOfBirth.topAnchor.constraint(equalTo: dateField.topAnchor, constant: 2),
             dateOfBirth.widthAnchor.constraint(equalToConstant: 100),
@@ -123,7 +155,7 @@ class LoginViewControllerSecond: UIViewController {
     }
     
     @objc private func nextButtonTapped() {
-        let nextViewController = ViewController()
+        let nextViewController = PersonalCard()
         navigationController?.pushViewController(nextViewController, animated: true)
     }
 }

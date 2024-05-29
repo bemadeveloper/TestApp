@@ -12,6 +12,9 @@
 		D70A722E2C0613C200157743 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70A722D2C0613C200157743 /* LoginViewController.swift */; };
 		D70A72302C06182400157743 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70A722F2C06182400157743 /* CustomTextField.swift */; };
 		D70A72322C0623E600157743 /* LoginViewControllerSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70A72312C0623E600157743 /* LoginViewControllerSecond.swift */; };
+		D70A72342C065F0800157743 /* PersonalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70A72332C065F0800157743 /* PersonalCard.swift */; };
+		D70A72362C066AF000157743 /* ScreenLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70A72352C066AF000157743 /* ScreenLoading.swift */; };
+		D70A72382C06FC0F00157743 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D70A72372C06FC0F00157743 /* GoogleService-Info.plist */; };
 		D7231BBF2C00B4A100FDE2F3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D7231BBE2C00B4A100FDE2F3 /* SnapKit */; };
 		D7231BC12C00B4A100FDE2F3 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = D7231BC02C00B4A100FDE2F3 /* SnapKit-Dynamic */; };
 		D7231BC32C00DE9500FDE2F3 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7231BC22C00DE9500FDE2F3 /* OnboardingView.swift */; };
@@ -29,6 +32,9 @@
 		D70A722D2C0613C200157743 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D70A722F2C06182400157743 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		D70A72312C0623E600157743 /* LoginViewControllerSecond.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerSecond.swift; sourceTree = "<group>"; };
+		D70A72332C065F0800157743 /* PersonalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCard.swift; sourceTree = "<group>"; };
+		D70A72352C066AF000157743 /* ScreenLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLoading.swift; sourceTree = "<group>"; };
+		D70A72372C06FC0F00157743 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D7231BC22C00DE9500FDE2F3 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		D7D0C4D72C00A3BE002EDBFC /* TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7D0C4DA2C00A3BE002EDBFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +83,8 @@
 				D70A722D2C0613C200157743 /* LoginViewController.swift */,
 				D70A722F2C06182400157743 /* CustomTextField.swift */,
 				D70A72312C0623E600157743 /* LoginViewControllerSecond.swift */,
+				D70A72332C065F0800157743 /* PersonalCard.swift */,
+				D70A72352C066AF000157743 /* ScreenLoading.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -130,6 +138,7 @@
 		D7D0C4F02C00A478002EDBFC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D70A72372C06FC0F00157743 /* GoogleService-Info.plist */,
 				D7D0C4E32C00A3C0002EDBFC /* Assets.xcassets */,
 				D7D0C4E52C00A3C0002EDBFC /* LaunchScreen.storyboard */,
 				D7D0C4E82C00A3C0002EDBFC /* Info.plist */,
@@ -187,6 +196,7 @@
 			mainGroup = D7D0C4CE2C00A3BE002EDBFC;
 			packageReferences = (
 				D7231BBD2C00B4A100FDE2F3 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				D70A72392C06FD3000157743 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = D7D0C4D82C00A3BE002EDBFC /* Products */;
 			projectDirPath = "";
@@ -204,6 +214,7 @@
 			files = (
 				D7D0C4E42C00A3C0002EDBFC /* Assets.xcassets in Resources */,
 				D7D0C4E72C00A3C0002EDBFC /* Base in Resources */,
+				D70A72382C06FC0F00157743 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D70A72362C066AF000157743 /* ScreenLoading.swift in Sources */,
 				D7D0C4DF2C00A3BE002EDBFC /* ViewController.swift in Sources */,
 				D7D0C4F22C00B186002EDBFC /* LoadingView.swift in Sources */,
 				D7D0C4DB2C00A3BE002EDBFC /* AppDelegate.swift in Sources */,
@@ -222,6 +234,7 @@
 				D70A72252C05F0F400157743 /* CoreDataStack.swift in Sources */,
 				D7231BC32C00DE9500FDE2F3 /* OnboardingView.swift in Sources */,
 				D70A722E2C0613C200157743 /* LoginViewController.swift in Sources */,
+				D70A72342C065F0800157743 /* PersonalCard.swift in Sources */,
 				D7D0C4DD2C00A3BE002EDBFC /* SceneDelegate.swift in Sources */,
 				D70A72302C06182400157743 /* CustomTextField.swift in Sources */,
 			);
@@ -370,6 +383,7 @@
 				DEVELOPMENT_TEAM = HDQUFL254V;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TestApp/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TestApp;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -397,6 +411,7 @@
 				DEVELOPMENT_TEAM = HDQUFL254V;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TestApp/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TestApp;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -438,6 +453,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D70A72392C06FD3000157743 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.26.0;
+			};
+		};
 		D7231BBD2C00B4A100FDE2F3 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
